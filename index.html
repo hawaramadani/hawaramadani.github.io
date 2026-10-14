@@ -1,0 +1,739 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hawa | My Personal Website</title>
+
+    <style>
+        /* ===== CSS: DESAIN WEBSITE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --bg: #fffaf7;
+            --text: #302c49;
+            --muted: #777187;
+            --purple: #8170b5;
+            --pink: #f8e6ef;
+            --card: #ffffff;
+            --border: #eadfea;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            transition: 0.3s;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        /* NAVBAR */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: bold;
+        }
+
+        .logo span,
+        .hero h1 span {
+            color: var(--purple);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--purple);
+        }
+
+        .menu-btn {
+            display: none;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 10px;
+            background: var(--pink);
+            color: var(--text);
+        }
+
+        .theme-btn {
+            border: none;
+            background: var(--pink);
+            padding: 8px 11px;
+            border-radius: 50%;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 570px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 45px;
+            padding-top: 55px;
+            padding-bottom: 55px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 14px;
+            background: var(--pink);
+            color: var(--purple);
+            border-radius: 30px;
+            font-size: 14px;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 5vw, 62px);
+            line-height: 1.2;
+            margin: 20px 0;
+        }
+
+        .hero p {
+            color: var(--muted);
+            margin-bottom: 15px;
+        }
+
+        .quote {
+            color: var(--purple) !important;
+            font-style: italic;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 11px 18px;
+            margin: 6px 5px 0 0;
+            border: 1px solid var(--purple);
+            border-radius: 12px;
+            background: var(--purple);
+            color: white;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px #8170b533;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--purple);
+        }
+
+        .hero-image {
+            min-height: 340px;
+            border-radius: 30px;
+            background: linear-gradient(
+                135deg, #eee3f8, #f9e4ed, #f9f0dc
+            );
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            box-shadow: 0 12px 35px #51436b12;
+        }
+
+        .avatar {
+            font-size: 130px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .sticker {
+            background: white;
+            padding: 9px 15px;
+            border-radius: 14px;
+            color: #655495;
+        }
+
+        /* SEMUA SECTION */
+        section.content {
+            padding-top: 35px;
+            padding-bottom: 35px;
+        }
+
+        .section-title {
+            font-size: 30px;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: var(--muted);
+            margin-bottom: 22px;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 25px;
+            box-shadow: 0 8px 25px #51436b0b;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+        }
+
+        .card p {
+            color: var(--muted);
+            margin-top: 10px;
+        }
+
+        /* TENTANG SAYA */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 20px;
+        }
+
+        .profile-info {
+            display: grid;
+            gap: 15px;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .info-icon {
+            background: var(--pink);
+            border-radius: 12px;
+            padding: 9px;
+            font-size: 20px;
+        }
+
+        .info-item small {
+            display: block;
+            color: var(--muted);
+        }
+
+        /* PENDIDIKAN */
+        .timeline {
+            margin-top: 18px;
+            display: grid;
+            gap: 20px;
+        }
+
+        .timeline-item {
+            padding-left: 15px;
+            border-left: 3px solid var(--purple);
+        }
+
+        .timeline-item small {
+            color: var(--purple);
+            font-weight: bold;
+        }
+
+        /* SKILL */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill {
+            background: var(--pink);
+            color: var(--purple);
+            border-radius: 30px;
+            padding: 8px 15px;
+            transition: 0.3s;
+        }
+
+        .skill:hover {
+            background: var(--purple);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* HOBI */
+        .hobbies {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .hobby {
+            text-align: center;
+            font-size: 32px;
+        }
+
+        .hobby p {
+            font-size: 14px;
+        }
+
+        /* MOTIVASI */
+        .dream {
+            background: linear-gradient(
+                120deg, #eee2f5, #fae6ee, #f9f0dc
+            );
+            border-radius: 25px;
+            padding: 35px;
+        }
+
+        .dream .emoji {
+            font-size: 45px;
+        }
+
+        /* KONTAK */
+        .contact {
+            margin-top: 35px;
+            margin-bottom: 35px;
+            text-align: center;
+            padding: 35px 20px;
+            border-radius: 25px;
+            background: linear-gradient(
+                120deg, #eee2f5, #fae6ee, #e9e4f7
+            );
+        }
+
+        .contact p {
+            color: #6f6681;
+            margin: 10px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px 0;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* ANIMASI */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        /* DARK MODE */
+        body.dark {
+            --bg: #191728;
+            --text: #f6efff;
+            --muted: #c5bdd5;
+            --purple: #b9a6ee;
+            --pink: #352b45;
+            --card: #242035;
+            --border: #40374e;
+        }
+
+        body.dark header {
+            background: var(--bg);
+        }
+
+        body.dark .hero-image {
+            background: linear-gradient(
+                135deg, #30263e, #422e40, #363044
+            );
+        }
+
+        body.dark .sticker {
+            background: #242035;
+            color: white;
+        }
+
+        body.dark .dream,
+        body.dark .contact {
+            background: linear-gradient(
+                120deg, #30263e, #422e40
+            );
+        }
+
+        /* TAMPILAN HP */
+        @media (max-width: 760px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding-top: 40px;
+                gap: 30px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hobbies {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                align-items: stretch;
+                width: 100%;
+                gap: 12px;
+                padding: 15px 0;
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            nav {
+                flex-wrap: wrap;
+            }
+
+            .theme-btn {
+                align-self: flex-start;
+            }
+
+            .hero-image {
+                min-height: 280px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation: none !important;
+                transition: none !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== HTML: NAVIGASI ===== -->
+    <header>
+        <nav class="container">
+            <a href="#home" class="logo">Hawa <span>♥</span></a>
+
+            <button class="menu-btn" id="menuBtn">
+                ☰ Menu
+            </button>
+
+            <div class="nav-links" id="navLinks">
+                <a href="#home">Home</a>
+                <a href="#about">Tentang</a>
+                <a href="#education">Pendidikan</a>
+                <a href="#skills">Keahlian</a>
+                <a href="#hobbies">Hobi</a>
+                <a href="#contact">Kontak</a>
+                <button class="theme-btn" id="themeBtn">🌙</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HALAMAN UTAMA -->
+        <section class="hero container" id="home">
+            <div>
+                <span class="badge">✿ Welcome to my website</span>
+
+                <h1>Hi, I'm <span>Hawa!</span> ♡</h1>
+
+                <p>
+                    Mahasiswa yang selalu berusaha menjadi
+                    versi terbaik dari diri sendiri.
+                    Belajar, bertumbuh, dan meraih mimpi.
+                </p>
+
+                <p class="quote">
+                    "Langkah kecil hari ini, untuk mimpi besar
+                    di masa depan."
+                </p>
+
+                <a href="#about" class="btn">
+                    ♡ Tentang Aku
+                </a>
+
+                <button class="btn btn-outline" id="helloBtn">
+                    ✉ Say Hello!
+                </button>
+            </div>
+
+            <div class="hero-image">
+                <div style="font-size: 28px; color: #8170b5;">
+                    ✦ ♡ ✧
+                </div>
+
+                <div class="avatar">👩🏻‍💻</div>
+
+                <div class="sticker">
+                    Dream · Learn · Grow 🌷
+                </div>
+            </div>
+        </section>
+
+        <!-- TENTANG SAYA -->
+        <section class="content container" id="about">
+            <h2 class="section-title">♡ About Me</h2>
+            <p class="subtitle">Kenalan lebih dekat, yuk!</p>
+
+            <div class="about-grid">
+                <div class="card">
+                    <h3>Halo, teman-teman! 🌷</h3>
+
+                    <p>
+                        Namaku Hawa. Aku adalah mahasiswa yang
+                        sedang belajar banyak hal baru, terutama
+                        di bidang teknologi dan pemrograman.
+                    </p>
+
+                    <p>
+                        Aku percaya bahwa setiap proses
+                        membutuhkan waktu. Karena itu, aku ingin
+                        terus berkembang, mencoba hal baru,
+                        dan mengejar impian.
+                    </p>
+
+                    <p><i>Nice to meet you! ♡</i></p>
+                </div>
+
+                <div class="card profile-info">
+                    <div class="info-item">
+                        <span class="info-icon">👤</span>
+                        <div>
+                            <small>Nama</small>
+                            <strong>Hawa</strong>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-icon">💻</span>
+                        <div>
+                            <small>Program Studi</small>
+                            <strong>Informatika</strong>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-icon">🎓</span>
+                        <div>
+                            <small>Fakultas</small>
+                            <strong>Ilmu Komputer</strong>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-icon">📍</span>
+                        <div>
+                            <small>Asal</small>
+                            <strong>Indonesia</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PENDIDIKAN -->
+        <section class="content container" id="education">
+            <h2 class="section-title">🎓 Pendidikan</h2>
+            <p class="subtitle">Perjalanan pendidikanku.</p>
+
+            <div class="card timeline">
+                <div class="timeline-item">
+                    <small>2025 - Sekarang</small>
+                    <h3>Universitas</h3>
+                    <p>Program Studi Informatika</p>
+                </div>
+
+                <div class="timeline-item">
+                    <small>Sebelumnya</small>
+                    <h3>Sekolah Menengah</h3>
+                    <p>Tempat memulai banyak cerita.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- KEAHLIAN -->
+        <section class="content container" id="skills">
+            <h2 class="section-title">⚙️ My Skills</h2>
+            <p class="subtitle">Hal yang sedang kupelajari.</p>
+
+            <div class="card">
+                <div class="skills">
+                    <span class="skill">HTML</span>
+                    <span class="skill">CSS</span>
+                    <span class="skill">JavaScript</span>
+                    <span class="skill">Python</span>
+                    <span class="skill">Java</span>
+                    <span class="skill">Problem Solving</span>
+                    <span class="skill">Kreativitas</span>
+                    <span class="skill">Kerja Tim</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOBI -->
+        <section class="content container" id="hobbies">
+            <h2 class="section-title">♡ My Hobbies</h2>
+            <p class="subtitle">Beberapa hal yang kusukai.</p>
+
+            <div class="hobbies">
+                <div class="card hobby">
+                    📚
+                    <p>Membaca</p>
+                </div>
+
+                <div class="card hobby">
+                    🎧
+                    <p>Mendengarkan Musik</p>
+                </div>
+
+                <div class="card hobby">
+                    🎬
+                    <p>Menonton Film</p>
+                </div>
+
+                <div class="card hobby">
+                    📷
+                    <p>Fotografi</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- MOTIVASI -->
+        <section class="content container">
+            <div class="dream">
+                <div class="emoji">🌅</div>
+                <h2>Small Steps, Big Dreams</h2>
+                <p>
+                    Tak harus langsung hebat. Yang penting terus
+                    belajar, berani mencoba, dan tidak berhenti
+                    bertumbuh.
+                </p>
+            </div>
+        </section>
+
+        <!-- KONTAK -->
+        <section class="contact container" id="contact">
+            <h2>Let's Connect! 💌</h2>
+
+            <p>
+                Terima kasih sudah berkunjung ke website-ku.
+                Semoga harimu menyenangkan!
+            </p>
+
+            <a href="mailto:hawa@example.com" class="btn">
+                ✉ Hubungi Aku
+            </a>
+
+            <a href="https://www.instagram.com/"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="btn btn-outline">
+                ◎ Instagram
+            </a>
+        </section>
+    </main>
+
+    <footer class="container">
+        <p>
+            Dibuat dengan ♡ oleh Hawa |
+            <span id="year"></span>
+        </p>
+    </footer>
+
+    <!-- ===== JAVASCRIPT: FITUR INTERAKTIF ===== -->
+    <script>
+        // Menu navigasi pada HP
+        const menuBtn = document.getElementById("menuBtn");
+        const navLinks = document.getElementById("navLinks");
+
+        menuBtn.addEventListener("click", function () {
+            const terbuka = navLinks.classList.toggle("open");
+
+            menuBtn.textContent = terbuka
+                ? "✕ Tutup"
+                : "☰ Menu";
+
+            menuBtn.setAttribute(
+                "aria-expanded",
+                String(terbuka)
+            );
+        });
+
+        // Tutup menu setelah link dipilih
+        document.querySelectorAll(".nav-links a")
+            .forEach(function (link) {
+                link.addEventListener("click", function () {
+                    navLinks.classList.remove("open");
+                    menuBtn.textContent = "☰ Menu";
+                    menuBtn.setAttribute("aria-expanded", "false");
+                });
+            });
+
+        // Tombol mode gelap dan terang
+        const themeBtn = document.getElementById("themeBtn");
+
+        themeBtn.addEventListener("click", function () {
+            document.body.classList.toggle("dark");
+
+            const modeGelap =
+                document.body.classList.contains("dark");
+
+            themeBtn.textContent = modeGelap ? "☀️" : "🌙";
+        });
+
+        // Tombol sapaan
+        const helloBtn = document.getElementById("helloBtn");
+
+        helloBtn.addEventListener("click", function () {
+            alert(
+                "Hai, teman-teman! ♡\n" +
+                "Terima kasih sudah mengunjungi website-ku.\n" +
+                "Semoga harimu menyenangkan! 🌷"
+            );
+        });
+
+        // Tahun otomatis
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+    </script>
+
+</body>
+</html>
